@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { AxiosInstance } from "axios";
-import { sleep, exponentialBackoff } from "../utils/sleep";
+import { sleep, exponentialBackoff } from "../../utils/sleep";
 
 export interface PdfDownloadResult {
     success: boolean;

@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { DetailDocument } from "../types/DetailDocument";
+import { DetailDocument } from "../../types/DetailDocument";
 
 /**
  * Extractor de DETALLE (HTML legacy PJ).
