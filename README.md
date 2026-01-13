@@ -52,42 +52,44 @@ No se utilizan librerías de automatización de navegador
 ---
 
 ## 📁 Estructura del proyecto
+
+```text
 scraper-challenge/
 │
 ├── src/
-│ ├── index.ts # Orquestador principal
-│
-│ ├── init/
-│ │ └── session.ts # Inicialización de sesión / contexto
-│
-│ ├── client/
-│ │ └── http.ts # Cliente HTTP (cookies, headers, retry)
-│
-│ ├── crawler/
-│ │ ├── paginator.ts # Navegación / paginación JSF
-│ │ ├── extractor.ts # Extracción de datos desde HTML
-│ │ └── pdfDownloader.ts # Descarga de PDFs (429 + backoff)
-│
-│ ├── storage/
-│ │ ├── writer.ts # Persistencia de datos
-│ │ └── failed.ts # Registro de descargas fallidas
-│
-│ ├── utils/
-│ │ ├── logger.ts # Logging
-│ │ └── sleep.ts # Delays / backoff
-│
-│ └── types/
-│ └── Document.ts # Tipos de dominio
+│   ├── index.ts                 # Orquestador principal
+│   │
+│   ├── init/
+│   │   └── session.ts           # Inicialización de sesión / contexto
+│   │
+│   ├── client/
+│   │   └── http.ts              # Cliente HTTP (cookies, headers, retry)
+│   │
+│   ├── crawler/
+│   │   ├── paginator.ts         # Navegación / paginación JSF
+│   │   ├── extractor.ts         # Extracción de datos desde HTML
+│   │   └── pdfDownloader.ts     # Descarga de PDFs (429 + backoff)
+│   │
+│   ├── storage/
+│   │   ├── writer.ts            # Persistencia de datos
+│   │   └── failed.ts            # Registro de descargas fallidas
+│   │
+│   ├── utils/
+│   │   ├── logger.ts            # Logging
+│   │   └── sleep.ts             # Delays / backoff
+│   │
+│   └── types/
+│       └── Document.ts          # Tipos de dominio
 │
 ├── output/
-│ ├── json/ # Datos extraídos
-│ └── pdf/ # PDFs descargados
+│   ├── json/                    # Datos extraídos
+│   └── pdf/                     # PDFs descargados
 │
 ├── .gitignore
 ├── package.json
 ├── tsconfig.json
 └── README.md
-
+```
 ---
 
 ## ⚙️ Instalación
