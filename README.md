@@ -176,7 +176,7 @@ src/
 ⚙️ Instalación
 
 ```bash
-git clone git@github.com:Ramirezciani/scraper-challenge.git
+git clone https://github.com/Ramirezciani/scraper-challenge.git
 cd scraper-challenge
 
 
