@@ -188,13 +188,6 @@ COMPORTAMIENTO:
  - Los fallos persistentes se registran para reintento posterior
  - El scraper continúa procesando otros documentos
 
-## Notas Finales 
-Este proyecto fue diseñado para demostrar:
-  - Análisis de sistemas legacy
-  - Manejo de estado y sesiones
-  - Diseño modular y mantenible
-  - Tolerancia a fallos en procesos de larga duración
-  - Documentación técnica clara
 
 # Notas finales
 
