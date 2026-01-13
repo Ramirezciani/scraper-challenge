@@ -54,33 +54,106 @@ No se utilizan librerías de automatización de navegador
 ## 📁 Estructura del proyecto
 
 ```text
-scraper-challenge/
+src/
+├── index.ts
+│   # Orquestador principal del scraper.
+│   # Define el flujo:
+│   # 1) Modo dry-run con HTML mock
+│   # 2) Inicialización de sesión
+│   # 3) Fallback a scraping real (WCM)
+│   # 4) Persistencia de resultados y PDFs
 │
-├── src/
-│   ├── index.ts                 # Orquestador principal
-│   │
-│   ├── init/
-│   │   └── session.ts           # Inicialización de sesión / contexto
-│   │
-│   ├── client/
-│   │   └── http.ts              # Cliente HTTP (cookies, headers, retry)
-│   │
-│   ├── crawler/
-│   │   ├── paginator.ts         # Navegación / paginación JSF
-│   │   ├── extractor.ts         # Extracción de datos desde HTML
-│   │   └── pdfDownloader.ts     # Descarga de PDFs (429 + backoff)
-│   │
-│   ├── storage/
-│   │   ├── writer.ts            # Persistencia de datos
-│   │   └── failed.ts            # Registro de descargas fallidas
-│   │
-│   ├── utils/
-│   │   ├── logger.ts            # Logging
-│   │   └── sleep.ts             # Delays / backoff
-│   │
-│   └── types/
-│       └── Document.ts          # Tipos de dominio
+├── client/
+│   └── http.ts
+│       # Cliente HTTP basado en axios
+│       # - Manejo de cookies (cookie-jar)
+│       # - Headers comunes
+│       # - Retry base (para requests generales)
 │
+├── init/
+│   └── session.ts
+│       # Inicializa el contexto de scraping
+│       # - Detecta bloqueos HTTP (403)
+│       # - Determina si usar JSF o fallback WCM
+│       # - Centraliza la lógica de arranque
+│
+├── crawler/
+│   ├── mock/
+│   │   # Implementación MOCK (offline / testing)
+│   │   # Usada para:
+│   │   # - Desarrollo
+│   │   # - Validación de extractores
+│   │   # - Cumplir dry-run solicitado en el desafío
+│   │
+│   │   ├── extractorResult.ts
+│   │   │   # Extrae resultados desde HTML mock
+│   │   │   # Simula listado de documentos
+│   │   │
+│   │   ├── extractorDetail.ts
+│   │   │   # Extrae metadata y PDF desde HTML mock
+│   │   │
+│   │   ├── paginator.ts
+│   │   │   # Simula navegación entre resultados/detalles
+│   │   │
+│   │   └── pdfDownloader.ts
+│   │       # Descarga PDFs mock
+│   │       # Mantiene misma interfaz que versión real
+│   │
+│   └── pj/
+│       # Implementación REAL contra sitio público del PJ (WCM)
+│       # Fuente:
+│       # https://www.pj.gob.pe/wps/wcm/connect/cij-juris/...
+│
+│       ├── extractorResult.pj.ts
+│       │   # Extrae filas reales desde tablas PJ
+│       │   # - Número de Recurso
+│       │   # - Distrito
+│       │   # - Sala
+│       │   # - Fecha
+│       │   # - URL del PDF
+│       │
+│       ├── extractorDetail.pj.ts
+│       │   # Extrae metadata adicional desde página detalle PJ
+│       │   # (cuando aplica)
+│       │
+│       ├── paginator.pj.ts
+│       │   # Navegación real (cuando hay múltiples páginas)
+│       │   # Preparado para extender paginación WCM
+│       │
+│       ├── pdfDownloader.pj.ts
+│       │   # Descarga PDFs reales
+│       │   # - Manejo de errores 429
+│       │   # - Retry con backoff exponencial
+│       │   # - Registro de fallos
+│       │
+│       └── wcmCrawler.ts
+│           # Crawler principal WCM
+│           # - Fetch inicial
+│           # - Uso de extractorResult.pj
+│           # - Orquestación de descargas de PDFs
+│
+├── storage/
+│   └── writer.ts
+│       # Persistencia estructurada
+│       # - Guarda resultados en JSON
+│       # - Organiza salida en output/json
+│
+├── types/
+│   ├── ResultDocument.ts
+│   │   # Modelo de documento en listado
+│   │
+│   └── DetailDocument.ts
+│       # Modelo de documento detallado + PDF
+│
+└── utils/
+    └── sleep.ts
+        # Utilidad de delay
+        # Usada para:
+        # - Backoff exponencial
+        # - Protección contra rate limiting
+        
+├── sample-result.html
+      # Mockup Html
 ├── output/
 │   ├── json/                    # Datos extraídos
 │   └── pdf/                     # PDFs descargados
@@ -122,3 +195,23 @@ Este proyecto fue diseñado para demostrar:
   - Diseño modular y mantenible
   - Tolerancia a fallos en procesos de larga duración
   - Documentación técnica clara
+
+# Notas finales
+
+- Este proyecto fue diseñado para demostrar competencias clave en contextos reales de scraping y sistemas legacy, incluyendo:
+    - Análisis y adaptación a arquitecturas web heredadas (JSF / WCM).
+    - Manejo explícito de estado, sesiones y bloqueos del servidor.
+    - Diseño modular, extensible y mantenible.
+    - Tolerancia a fallos en procesos de larga duración.
+    - Separación clara entre lógica de extracción, navegación y persistencia.
+    - Documentación técnica clara, orientada a evaluadores y futuros mantenedores.
+
+# Conclusión
+ - Este scraper es capaz de:
+    Navegar sitios web legacy del Poder Judicial del Perú.
+    Extraer información estructurada desde páginas de resultados y detalle.
+    Descargar documentos PDF reales desde el sitio público accesible (WCM).
+    Operar de forma resiliente frente a bloqueos, errores de red y limitaciones de rate-limit.
+    Ejecutarse tanto en modo dry-run (HTML mock) como contra datos reales, garantizando trazabilidad y capacidad de prueba.
+
+  - La arquitectura fue pensada para que el scraper pueda llegar a procesar la totalidad del contenido disponible si se deja ejecutando el tiempo suficiente, cumpliendo con los requerimientos del desafío y con estándares de calidad esperados en entornos productivos.

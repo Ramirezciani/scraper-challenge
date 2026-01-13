@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Derecho a la Prueba",
+    "date": "15/04/2013",
+    "court": "2da Sala Constitucional",
+    "detailUrl": "/wps/wcm/connect/jurisprudencia/detalle1.xhtml"
+  },
+  {
+    "title": "Debido Proceso y Motivación",
+    "date": "22/08/2016",
+    "court": "Sala Suprema Penal",
+    "jsfAction": "jsfcljs(document.forms[0],{'_idcl':'form:j_idt45'},'');return false;"
+  },
+  {
+    "title": "Principio de Legalidad",
+    "date": "03/11/2019",
+    "court": "Sala Civil Permanente",
+    "detailUrl": "/wps/wcm/connect/jurisprudencia/detalle3.xhtml"
+  }
+]
