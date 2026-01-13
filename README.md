@@ -21,6 +21,14 @@ mantenible y bien estructurado**.
 
 ---
 
+# ⚠️ Limitaciones conocidas
+
+- El endpoint JSF original puede devolver HTTP 403 dependiendo del entorno y la ubicación geográfica.
+- La paginación JSF no es accesible sin una sesión válida, por lo que no siempre es posible recorrer la totalidad del sitio JSF.
+- El scraper se apoya en el sitio público WCM como fuente alternativa estable.
+
+---
+
 ## 🌐 Sitio objetivo
 
 URL base del portal: https://jurisprudencia.pj.gob.pe/jurisprudenciaweb/faces/page/resultado.xhtml
@@ -165,20 +173,20 @@ src/
 ```
 ---
 
-## ⚙️ Instalación
+⚙️ Instalación
 
-    ```bash
-    npm install
+```bash
+npm install
+▶️ Ejecución
 
-    ▶️ Ejecución
+- Modo desarrollo:
+npm run dev
 
-    Modo desarrollo:
-    npm run dev
+- Build y ejecución:
 
-    Build y ejecución:
-    npm run build
-    npm start
-    ```
+npm run build
+npm start
+```
 
 ## ⚙️ Descarga de PDFs y manejo de errores  
 
