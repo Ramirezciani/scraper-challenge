@@ -176,16 +176,23 @@ src/
 ⚙️ Instalación
 
 ```bash
+git clone git@github.com:Ramirezciani/scraper-challenge.git
+cd scraper-challenge
+
+
 npm install
 ▶️ Ejecución
-
-- Modo desarrollo:
-npm run dev
 
 - Build y ejecución:
 
 npm run build
 npm start
+
+
+- Modo desarrollo:
+npm run dev
+
+
 ```
 
 ## ⚙️ Descarga de PDFs y manejo de errores  
